@@ -23,7 +23,7 @@ namespace Mulakat
         public Form1()
         {
             InitializeComponent();
-            con = new SQLiteConnection("Data Source=\"C:\\Users\\abugr\\source\\repos\\Mulakat\\Mulakat\\rxsample.db\";Version=3;");
+            con = new SQLiteConnection("Data Source=rxsample.db;Version=3;");
             ds = new DataSet();
             da = new SQLiteDataAdapter("Select * FROM ILACLAR LEFT JOIN ILAC_FORM ON ILACLAR.ID = ILAC_FORM.ILAC_ID LEFT JOIN ILAC_AMBALAJ ON ILAC_FORM.ID = ILAC_AMBALAJ.ILAC_FORM_ID LEFT JOIN ILAC_ETKIN_MADDELER ON ILAC_FORM.ID = ILAC_ETKIN_MADDELER.ILAC_FORM_ID LEFT JOIN ETKIN_MADDELER ON ILAC_ETKIN_MADDELER.ETKIN_MADDE = ETKIN_MADDELER.ID", con);
             con.Open();
@@ -78,6 +78,8 @@ namespace Mulakat
             counter = barkodlar.Count - 1;
             button1.Enabled = barkodlar.Count > 1 ? true : false;
             button3.Enabled = true;
+            button5.Visible = true;
+            button4.Visible = true;
 
         }
 
@@ -139,7 +141,9 @@ namespace Mulakat
         private void button4_Click(object sender, EventArgs e)
         {
             var formPopup = new Form();
+            formPopup.Size = new Size(620, 600);
             WebBrowser wb = new WebBrowser();
+            wb.Size = new Size(600, 600);
             wb.DocumentText = html;
             formPopup.Controls.Add(wb);
             formPopup.Show(this);
